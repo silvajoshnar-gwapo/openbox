@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17143b">
+  <link rel="icon" type="image/png" href="images/giftbox.avif">
+  <title>OPEN THE BOX: Who Will Answer?</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Open the Box home" data-home-link>
+        <span class="brand-icon" aria-hidden="true">?</span>
+        <span>CLASSROOM GAME SHOW</span>
+      </a>
+      <span class="live-badge"><span aria-hidden="true"></span> LET'S PLAY</span>
+    </header>
+
+    <section class="screen welcome-screen" id="home-screen" aria-labelledby="home-title">
+      <div class="welcome-content">
+        <p class="eyebrow">THE CLASSROOM GAME SHOW</p>
+        <h1 id="home-title">OPEN<br><span>THE BOX</span></h1>
+        <p class="welcome-subtitle">Pick a Box. Reveal a Name.<br>Answer the Question!</p>
+        <button class="button button-primary button-large" id="start-button" type="button">
+          Start Game <span aria-hidden="true">→</span>
+        </button>
+        <p class="welcome-note">Who's ready to be in the spotlight?</p>
+      </div>
+      <div class="showcase" aria-hidden="true">
+        <div class="sparkle sparkle-one">✦</div>
+        <div class="sparkle sparkle-two">✦</div>
+        <div class="sparkle sparkle-three">✧</div>
+        <div class="showcase-box showcase-box-back"></div>
+        <div class="showcase-box showcase-box-front"><span>?</span></div>
+        <div class="showcase-star">★</div>
+      </div>
+    </section>
+
+    <section class="screen setup-screen" id="setup-screen" aria-labelledby="setup-title" hidden>
+      <div class="section-heading">
+        <p class="eyebrow">ROUND SETUP</p>
+        <h1 id="setup-title">Who's in the class?</h1>
+        <p>Add one student name per line. Blank lines will be skipped.</p>
+      </div>
+      <form id="names-form" class="setup-card">
+        <label for="student-names">Student names</label>
+        <textarea id="student-names" name="student-names" rows="9" spellcheck="false" aria-describedby="names-hint names-error">Alex
+Sam
+Jordan
+Taylor
+Casey
+Riley</textarea>
+        <div class="form-footer">
+          <span id="names-hint">You can replace these sample names with your class list.</span>
+          <span id="name-count" aria-live="polite">6 names</span>
+        </div>
+        <p class="form-error" id="names-error" role="alert" hidden>Please enter at least one student name.</p>
+        <div class="setup-actions">
+          <button class="button button-secondary" id="setup-home-button" type="button">← Back to Home</button>
+          <button class="button button-primary" type="submit">Save Names &amp; Start <span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+    </section>
+
+    <section class="screen game-screen" id="game-screen" aria-labelledby="game-title" hidden>
+      <div class="game-heading">
+        <div>
+          <p class="eyebrow">YOUR MOMENT IS HERE</p>
+          <h1 id="game-title">Pick a box!</h1>
+          <p class="game-instruction">Choose any unopened box to reveal who's answering.</p>
+        </div>
+        <div class="progress-card" aria-live="polite">
+          <span class="progress-count" id="progress-count">0 out of 0</span>
+          <span>boxes opened</span>
+          <div class="progress-track" role="progressbar" aria-label="Boxes opened" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" id="progress-bar">
+            <span id="progress-fill"></span>
+          </div>
+        </div>
+      </div>
+      <div class="box-grid" id="box-grid" aria-label="Mystery boxes"></div>
+      <div class="game-controls">
+        <button class="button button-secondary" id="restart-button" type="button">↻ Restart Game</button>
+        <button class="button button-secondary" id="reveal-all-button" type="button">Reveal All</button>
+        <button class="button button-secondary" id="reset-button" type="button">Edit Names</button>
+        <button class="button button-quiet" id="game-home-button" type="button">⌂ Back to Home</button>
+      </div>
+    </section>
+
+    <section class="screen completion-screen" id="completion-screen" aria-labelledby="completion-title" hidden>
+      <div class="completion-card">
+        <div class="completion-icon" aria-hidden="true">★</div>
+        <p class="eyebrow">WHAT A ROUND!</p>
+        <h1 id="completion-title">ALL BOXES<br><span>OPENED!</span></h1>
+        <p class="completion-summary" id="completion-summary"></p>
+        <div class="completion-names" id="completion-names" aria-label="Students selected"></div>
+        <div class="completion-actions">
+          <button class="button button-primary" id="play-again-button" type="button">Play Another Round <span aria-hidden="true">↻</span></button>
+          <button class="button button-secondary" id="edit-list-button" type="button">Edit Student List</button>
+          <button class="button button-quiet" id="completion-home-button" type="button">Back to Home</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="modal-backdrop" id="result-modal" hidden>
+      <section class="result-card" role="dialog" aria-modal="true" aria-labelledby="result-title" aria-describedby="result-name">
+        <button class="modal-close" id="close-result-button" type="button" aria-label="Close result">×</button>
+        <div class="result-confetti" aria-hidden="true">✦　✧　★</div>
+        <p class="eyebrow">THE BOX REVEALS...</p>
+        <h2 id="result-title">CONGRATULATIONS!<br>YOU HAVE BEEN SELECTED!</h2>
+        <p class="result-prompt">Your question is waiting for you...</p>
+        <p class="result-name" id="result-name"></p>
+        <button class="button button-primary" id="continue-button" type="button">Continue Choosing <span aria-hidden="true">→</span></button>
+      </section>
+    </div>
+
+    <footer class="footer">A little mystery. A lot of classroom fun.</footer>
+  </main>
+</body>
+</html>
